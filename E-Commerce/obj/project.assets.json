@@ -2058,6 +2058,7 @@
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 6.0.6",
       "Microsoft.EntityFrameworkCore >= 5.0.8",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.8",
+      "Microsoft.EntityFrameworkCore.Relational >= 5.0.8",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.8",
       "MySql.Data >= 8.0.29",
       "MySql.EntityFrameworkCore >= 5.0.8",
@@ -2123,6 +2124,10 @@
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
+            "target": "Package",
+            "version": "[5.0.8, )"
+          },
+          "Microsoft.EntityFrameworkCore.Relational": {
             "target": "Package",
             "version": "[5.0.8, )"
           },

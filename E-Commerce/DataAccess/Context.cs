@@ -2,6 +2,7 @@
 using E_Commerce.Models;
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 
 namespace E_Commerce.DataAccess
@@ -27,15 +28,35 @@ namespace E_Commerce.DataAccess
         }
         
         public DbSet<Account> Accounts { get; set; }
+        public DbSet<Discount> Discounts { get; set; }
+        public DbSet<DiscountValue> DiscountValues { get; set; }
+        public DbSet<OptionRole> OptionRoles { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Product_Size> Product_Sizes { get; set; }
+        public DbSet<Product_Store> Product_Stores { get; set; }
+        public DbSet<ProductBrand> ProductBrands { get; set; }
+        public DbSet<ProductSize> ProductSizes { get; set; }
+        public DbSet<ProductType> ProductTypes { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Store> Stores { get; set; }
+        public DbSet<User> Users { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region Account
             modelBuilder.Entity<Account>(entity =>
             {
                 entity.ToTable("Account")
                     .HasKey(e => e.Id);
                 entity.Property(e => e.Id)
                     .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.Created_date)
+                    .IsRequired();
+
+                entity.Property(e => e.Modified_date)
+                    .IsRequired();
 
                 entity.HasIndex(e => e.Username)
                     .IsUnique();
@@ -49,14 +70,9 @@ namespace E_Commerce.DataAccess
                     .IsRequired()
                     .IsUnicode(false);
 
-                entity.Property(e => e.Created_date)
-                    .IsRequired();
-
-                entity.Property(e => e.Modified_date)
-                    .IsRequired();
             });
+            #endregion
 
-            
             // Seeding data
             modelBuilder.Seed();
         }
