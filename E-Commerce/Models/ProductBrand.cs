@@ -4,13 +4,13 @@
     {
         private string name;
         private string description;
-        private string photoURL;
 
         private ICollection<Product> products;
+        private ICollection<Photo> photos;
 
         public string Name { get => name; set => name = value; }
         public string Description { get => description; set => description = value; }
-        public string PhotoURL { get => photoURL; set => photoURL = value; }
         public ICollection<Product> Products { get => products; set => products = value; }
+        public ICollection<Photo> Photos { get => photos; set => photos = value; }
     }
 }

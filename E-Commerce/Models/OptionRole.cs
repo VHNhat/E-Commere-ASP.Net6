@@ -7,5 +7,6 @@
 
         public string Name { get => name; set => name = value; }
         public ICollection<Option_Role> Option_roles { get => option_roles; set => option_roles = value; }
+       
     }
 }

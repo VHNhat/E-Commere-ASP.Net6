@@ -14,10 +14,13 @@ namespace E_Commerce.Extension
             modelBuilder.Entity<Account>().HasData(
                 new Account()
                 {
-                    Id = "abc",
+                    CreatedAt = DateTime.Now,
+                    LastModifiedAt = DateTime.Now,
                     Username = "admin",
                     Password = "123",
-                    Created_date = DateTime.Now
+                    Email = "nhat@gmail.com"
+                    
+
                 });
 
         }

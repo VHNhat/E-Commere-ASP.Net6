@@ -8,11 +8,11 @@ namespace E_Commerce.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         private Guid id;
-        private DateTime created_date;
-        private DateTime modified_date;
+        private DateTime createdAt;
+        private DateTime lastModifiedAt;
 
         public Guid Id { get => id; set => id = value; }
-        public DateTime Created_date { get => created_date; set => created_date = value; }
-        public DateTime Modified_date { get => modified_date; set => modified_date = value; }
+        public DateTime CreatedAt { get => createdAt; set => createdAt = value; }
+        public DateTime LastModifiedAt { get => lastModifiedAt; set => lastModifiedAt = value; }
     }
 }
