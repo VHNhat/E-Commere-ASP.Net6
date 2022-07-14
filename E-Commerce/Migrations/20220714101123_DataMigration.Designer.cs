@@ -3,14 +3,16 @@ using System;
 using E_Commerce.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace E_Commerce.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220714101123_DataMigration")]
+    partial class DataMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,19 +66,6 @@ namespace E_Commerce.Migrations
                         .IsUnique();
 
                     b.ToTable("Account");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreatedAt = new DateTime(2022, 7, 14, 17, 16, 23, 301, DateTimeKind.Local).AddTicks(1738),
-                            Email = "nhat@gmail.com",
-                            LastModifiedAt = new DateTime(2022, 7, 14, 17, 16, 23, 301, DateTimeKind.Local).AddTicks(2056),
-                            Password = "123",
-                            RoleId = 1L,
-                            UserId = 1L,
-                            Username = "admin"
-                        });
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Banner", b =>
@@ -651,15 +640,6 @@ namespace E_Commerce.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Role");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreatedAt = new DateTime(2022, 7, 14, 17, 16, 23, 302, DateTimeKind.Local).AddTicks(3686),
-                            LastModifiedAt = new DateTime(2022, 7, 14, 17, 16, 23, 302, DateTimeKind.Local).AddTicks(3687),
-                            Name = "admin"
-                        });
                 });
 
             modelBuilder.Entity("E_Commerce.Models.ShoppingCart", b =>
@@ -705,7 +685,7 @@ namespace E_Commerce.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2022, 7, 14, 17, 16, 23, 298, DateTimeKind.Local).AddTicks(6025));
+                        .HasDefaultValue(new DateTime(2022, 7, 14, 17, 11, 22, 980, DateTimeKind.Local).AddTicks(3626));
 
                     b.Property<string>("TilteSize")
                         .IsRequired()
@@ -756,19 +736,6 @@ namespace E_Commerce.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Store");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            Address = "Đặng Thùy Trâm",
-                            CreatedAt = new DateTime(2022, 7, 14, 17, 16, 23, 302, DateTimeKind.Local).AddTicks(6778),
-                            Detail = "cc",
-                            LastModifiedAt = new DateTime(2022, 7, 14, 17, 16, 23, 302, DateTimeKind.Local).AddTicks(6778),
-                            Map = "cc",
-                            Name = "Unny mini house",
-                            Photo = "photo.png"
-                        });
                 });
 
             modelBuilder.Entity("E_Commerce.Models.User", b =>
@@ -813,20 +780,6 @@ namespace E_Commerce.Migrations
                     b.HasIndex("StoreId");
 
                     b.ToTable("User");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            AccountId = 1L,
-                            CreatedAt = new DateTime(2022, 7, 14, 17, 16, 23, 302, DateTimeKind.Local).AddTicks(4532),
-                            Gender = 1,
-                            LastModifiedAt = new DateTime(2022, 7, 14, 17, 16, 23, 302, DateTimeKind.Local).AddTicks(4533),
-                            Name = "Võ Hoàng Nhật",
-                            Phone = "0942400722",
-                            Photo = "photo.png",
-                            StoreId = 1L
-                        });
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Voucher", b =>

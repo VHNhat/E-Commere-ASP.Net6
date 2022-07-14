@@ -1,5 +1,6 @@
 
 using E_Commerce.DataAccess;
+using E_Commerce.Generic;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Serialization;
 
@@ -21,7 +22,18 @@ builder.Services.AddControllersWithViews()
                .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver
                = new DefaultContractResolver());
 
+/*System.Reflection.Assembly.GetExecutingAssembly()
+            .GetTypes()
+            .Where(item => item.GetInterfaces()
+            .Where(i => i.IsGenericType).Any(i => i.GetGenericTypeDefinition() == typeof(IGenericService<>)) && !item.IsAbstract && !item.IsInterface)
+            .ToList()
+            .ForEach(assignedTypes =>
+            {
+                var serviceType = assignedTypes.GetInterfaces().First(i => i.GetGenericTypeDefinition() == typeof(IGenericService<>));
+                builder.Services.AddScoped(serviceType, assignedTypes);
+            });*/
 
+builder.Services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
 
 var app = builder.Build();
 

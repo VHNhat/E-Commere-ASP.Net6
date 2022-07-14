@@ -30,6 +30,9 @@ namespace E_Commerce.DataAccess
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Discount> Discounts { get; set; }
         public DbSet<DiscountValue> DiscountValues { get; set; }
+
+        public DbSet<Option_Role> Option_Roles { get; set; }
+        public DbSet<Photo> Photos { get; set; }
         public DbSet<OptionRole> OptionRoles { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Product_Size> Product_Sizes { get; set; }
@@ -40,7 +43,17 @@ namespace E_Commerce.DataAccess
         public DbSet<Role> Roles { get; set; }
         public DbSet<Store> Stores { get; set; }
         public DbSet<User> Users { get; set; }
-        
+        public DbSet<Banner> Banners { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<ShoppingCart> ShoppingCarts { get; set; }
+        public DbSet<ShoppingCart_Product> ShoppingCart_Products { get; set; }
+
+        public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Voucher> Vouchers { get; set; }
+        public DbSet<VoucherType> VoucherTypes { get; set; }
+        public DbSet<ReviewProduct> ReviewProducts { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -58,7 +71,7 @@ namespace E_Commerce.DataAccess
                 entity.Property(e => e.LastModifiedAt)
                     .IsRequired();
 
-                entity.HasIndex(e => e.Username)
+                entity.HasIndex(e => e.Email)
                     .IsUnique();
                 entity.Property(e => e.Username)
                     .HasMaxLength(100)
@@ -73,6 +86,7 @@ namespace E_Commerce.DataAccess
                 entity.HasIndex(e => e.Email)
                     .IsUnique();
                 entity.Property(e => e.Email)
+                    .HasMaxLength(100)
                     .IsRequired()
                     .IsUnicode(false);
 
@@ -113,7 +127,7 @@ namespace E_Commerce.DataAccess
                 entity.Property(e => e.ExpiredAt)
                     .IsRequired();
 
-                entity.HasOne<DiscountValue>(o => o.Value)
+                entity.HasOne<DiscountValue>(o => o.DiscountValue)
                     .WithMany(m => m.Discounts)
                     .HasForeignKey(fk => fk.ValueId)
                     .OnDelete(DeleteBehavior.Cascade);
@@ -429,7 +443,10 @@ namespace E_Commerce.DataAccess
                 entity.Property(e => e.Gender)
                     .IsRequired();
 
+                entity.HasIndex(e => e.Phone)
+                    .IsUnique();
                 entity.Property(e => e.Phone)
+                    .HasMaxLength(11)
                     .IsRequired();
 
                 entity.Property(e => e.AccountId)
@@ -441,10 +458,314 @@ namespace E_Commerce.DataAccess
                     .OnDelete(DeleteBehavior.SetNull);
             });
             #endregion
+            #region Banner
+            modelBuilder.Entity<Banner>(entity =>
+            {
+                entity.ToTable("Banner")
+                    .HasKey(e => e.Id);
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
 
+                entity.Property(e => e.CreatedAt)
+                    .IsRequired();
+
+                entity.Property(e => e.LastModifiedAt)
+                    .IsRequired();
+
+                entity.Property(e => e.Name)
+                    .IsRequired();
+
+                entity.Property(e => e.Photo)
+                    .IsRequired();
+
+            });
+            #endregion
+            #region Voucher
+            modelBuilder.Entity<Voucher>(entity => 
+            {
+                entity.ToTable("Voucher")
+                    .HasKey(e => e.Id);
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.CreatedAt)
+                    .IsRequired();
+
+                entity.Property(e => e.LastModifiedAt)
+                    .IsRequired();
+
+                entity.Property(e => e.Code)
+                    .IsRequired();
+
+                entity.Property(e => e.Name)
+                    .IsRequired();
+
+                entity.Property(e => e.Quantity)
+                    .IsRequired();
+
+                entity.Property(e => e.ExpiredAt)
+                    .IsRequired();
+
+                entity.Property(e => e.TypeId)
+                    .IsRequired(false);
+
+                entity.HasOne<VoucherType>(o => o.Type)
+                    .WithMany(m => m.Vouchers)
+                    .HasForeignKey(fk => fk.TypeId)
+                    .OnDelete(DeleteBehavior.SetNull);
+            });
+            #endregion
+            #region VoucherType
+            modelBuilder.Entity<VoucherType>(entity => 
+            {
+                entity.ToTable("VoucherType")
+                    .HasKey(e => e.Id);
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.CreatedAt)
+                    .IsRequired();
+
+                entity.Property(e => e.LastModifiedAt)
+                    .IsRequired();
+
+                entity.Property(e => e.Name)
+                    .IsRequired();
+                
+                entity.Property(e => e.Photo)
+                    .IsRequired();
+
+            });
+            #endregion
+            #region ReviewProduct
+            modelBuilder.Entity<ReviewProduct>(entity => 
+            {
+                entity.ToTable("ReviewProduct")
+                    .HasKey(e => e.Id);
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.CreatedAt)
+                    .IsRequired();
+
+                entity.Property(e => e.LastModifiedAt)
+                    .IsRequired();
+
+                entity.Property(e => e.Like)
+                    .HasDefaultValue(0);
+
+                entity.Property(e => e.Dislike)
+                    .HasDefaultValue(0);
+
+                entity.HasOne<Product>(o => o.Product)
+                    .WithMany(m => m.Reviews)
+                    .HasForeignKey(o => o.ProductId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+            #endregion
+            #region Notification
+            modelBuilder.Entity<Notification>(entity => 
+            {
+                entity.ToTable("Notification")
+                    .HasKey(e => e.Id);
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.CreatedAt)
+                    .IsRequired();
+
+                entity.Property(e => e.LastModifiedAt)
+                    .IsRequired();
+
+                entity.Property(e => e.Name)
+                    .IsRequired();
+
+                entity.Property(e => e.Content)
+                    .IsRequired();
+
+                entity.Property(e => e.IsActive)
+                    .HasDefaultValue(true);
+            });
+            #endregion
+            #region Customer
+            modelBuilder.Entity<Customer>(entity => 
+            {
+                entity.ToTable("Customer")
+                    .HasKey(e => e.Id);
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.CreatedAt)
+                    .IsRequired();
+
+                entity.Property(e => e.LastModifiedAt)
+                    .IsRequired();
+
+                entity.HasIndex(e => e.Username)
+                    .IsUnique();
+                entity.Property(e => e.Username)
+                    .HasMaxLength(100)
+                    .IsRequired()
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Password)
+                    .HasMaxLength(100)
+                    .IsRequired()
+                    .IsUnicode(false);
+
+                entity.HasIndex(e => e.Email)
+                    .IsUnique();
+                entity.Property(e => e.Email)
+                    .HasMaxLength(100)
+                    .IsRequired()
+                    .IsUnicode(false);
+
+                entity.HasIndex(e => e.Phone)
+                    .IsUnique();
+                entity.Property(e => e.Phone)
+                    .HasMaxLength(11)
+                    .IsRequired();
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(100)
+                    .IsRequired()
+                    .IsUnicode();
+
+                entity.Property(e => e.Avata)
+                    .HasMaxLength(255);
+
+                entity.Property(e => e.Address)
+                    .HasColumnType("text")
+                    .IsUnicode();
+
+                entity.Property(e => e.City)
+                    .HasMaxLength(100)
+                    .IsUnicode();
+
+                entity.Property(e => e.Country)
+                    .HasMaxLength(100)
+                    .IsUnicode();
+
+                entity.Property(e => e.Gender)
+                    .IsRequired();
+            });
+            #endregion
+            #region Order
+            modelBuilder.Entity<Order>(entity => 
+            {
+                entity.ToTable("Order")
+                    .HasKey(e => e.Id);
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.CreatedAt)
+                    .IsRequired();
+
+                entity.Property(e => e.LastModifiedAt)
+                    .IsRequired();
+
+                entity.Property(e => e.CustomerId)
+                    .IsRequired();
+
+                entity.Property(e => e.Validated)
+                    .HasDefaultValue(0);
+
+                entity.Property(e => e.Status)
+                    .HasMaxLength(100)
+                    .HasDefaultValue("Đang chờ thanh toán")
+                    .IsUnicode();
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .IsUnicode();
+
+                entity.Property(e => e.Address)
+                    .IsRequired()
+                    .IsUnicode();
+
+                entity.Property(e => e.PayBy)
+                    .IsRequired()
+                    .IsUnicode();
+
+                entity.Property(e => e.Phone)
+                    .IsRequired()
+                    .IsUnicode();
+
+                entity.Property(e => e.Time)
+                    .HasMaxLength(100)
+                    .HasDefaultValue("15-20 phút")
+                    .IsUnicode();
+
+                entity.Property(e => e.Note)
+                    .IsUnicode();
+
+                entity.Property(e => e.CustomerId)
+                    .IsRequired(false);
+
+                entity.HasOne<Customer>(o => o.Customer)
+                    .WithMany(m => m.Orders)
+                    .HasForeignKey(fk => fk.CustomerId)
+                    .OnDelete(DeleteBehavior.SetNull);
+            });
+            #endregion
+            #region ShoppingCart
+            modelBuilder.Entity<ShoppingCart>(entity =>
+            {
+                entity.ToTable("ShoppingCart").
+                    HasKey(e => e.Id);
+                entity.Property(e => e.Id)
+                    .ValueGeneratedOnAdd();
+
+                entity.Property(e => e.CreatedAt)
+                    .IsRequired();
+
+                entity.Property(e => e.LastModifiedAt)
+                    .IsRequired();
+
+                entity.Property(e => e.ProductQuantity)
+                    .IsRequired()
+                    .HasDefaultValue(0);
+
+                entity.Property(e => e.CustomerId)
+                    .IsRequired(false);
+
+                entity.HasOne<Customer>(o => o.Customer)
+                    .WithMany(m => m.ShoppingCarts)
+                    .HasForeignKey(fk => fk.CustomerId)
+                    .OnDelete(DeleteBehavior.SetNull);
+            });
+            #endregion
+            #region ShoppingCart_Product
+            modelBuilder.Entity<ShoppingCart_Product>(entity =>
+            {
+                entity.ToTable("ShoppingCart_Product")
+                    .HasKey(e => new { e.ShoppingCartId, e.ProductId });
+
+                entity.Property(e => e.Count)
+                    .HasDefaultValue(0);
+
+                entity.Property(e => e.TilteSize)
+                    .HasMaxLength(100)
+                    .HasDefaultValue("Nhỏ")
+                    .IsUnicode();
+
+                entity.Property(e => e.CreatedDate)
+                    .HasDefaultValue(DateTime.Now);
+
+                entity.HasOne<ShoppingCart>(o => o.ShoppingCart)
+                    .WithMany(m => m.ShoppingCart_Products)
+                    .HasForeignKey(fk => fk.ShoppingCartId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne<Product>(o => o.Product)
+                    .WithMany(m => m.ShoppingCart_Products)
+                    .HasForeignKey(fk => fk.ProductId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+            #endregion
 
             // Seeding data
-            /*modelBuilder.Seed();*/
+            modelBuilder.Seed();
         }
     }
 }

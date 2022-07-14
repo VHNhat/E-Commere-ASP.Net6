@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "LqG2i5zSokUlmKLj3sB18MvJLbSOMQrqXWsIvJcN5RQXNaMrLT8OZKy3YcxiWf7toNlFWN2iA/1nKxjiUdxoxQ==",
+  "dgSpecHash": "zliPXRyk+nbhuj6wRIb9Haj/CKJ1EU1f2Aa+j6DcGNae5iM/AF3/qzxyeXaCn3DlOqJJV44Es7Qi7jlrihHlzg==",
   "success": true,
   "projectFilePath": "E:\\Code Life\\Personal Project\\E-Commere\\E-Commerce\\E-Commerce.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\vohoa\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\vohoa\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",
     "C:\\Users\\vohoa\\.nuget\\packages\\google.protobuf\\3.19.4\\google.protobuf.3.19.4.nupkg.sha512",
     "C:\\Users\\vohoa\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

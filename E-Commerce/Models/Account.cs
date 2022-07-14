@@ -6,18 +6,23 @@
         private string password;
         private string email;
 
-        private Guid? roleId;
+        private long? roleId;
         private Role role;
 
-        private Guid? userId;
+        private long? userId;
         private User user;
 
         public string Username { get => username; set => username = value; }
         public string Password { get => password; set => password = value; }
         public string Email { get => email; set => email = value; }
-        public Guid? RoleId { get => roleId; set => roleId = value; }
+        public long? RoleId { get => roleId; set => roleId = value; }
         public Role Role { get => role; set => role = value; }
-        public Guid? UserId { get => userId; set => userId = value; }
+        public long? UserId { get => userId; set => userId = value; }
         public User User { get => user; set => user = value; }
+
+        public override string? ToString()
+        {
+            return base.ToString();
+        }
     }
 }

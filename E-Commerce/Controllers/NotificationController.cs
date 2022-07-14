@@ -1,5 +1,4 @@
 ﻿using E_Commerce.DataAccess;
-using E_Commerce.Dto;
 using E_Commerce.Models;
 using E_Commerce.Services;
 using Microsoft.AspNetCore.Http;
@@ -7,66 +6,72 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce.Controllers
 {
-    /*[Route("api/[controller]")]*/
+    [Route("api/[controller]")]
     [ApiController]
-    public class AccountController : ControllerBase
+    public class NotificationController : ControllerBase
     {
         private readonly IConfiguration _config;
-        private readonly AccountService _service;
+        private readonly NotificationService _service;
         private readonly Context context;
 
-        public AccountController(IConfiguration config, Context ctx)
+        public NotificationController(IConfiguration config, Context ctx)
         {
             _config = config;
             context = ctx;
-            _service = new AccountService(_config, ctx);
+            _service = new NotificationService(_config, ctx);
         }
 
-        [Route("api/account")]
+        [Route("api/notification")]
         [HttpGet]
         public ActionResult GetAllAccount()
         {
-            List<Account> accounts = _service.GetAll();
+            List<Notification> accounts = _service.GetAll();
             if (accounts.Count == 0)
                 return new JsonResult("There is no data");
 
             return new JsonResult(accounts);
         }
-        [Route("api/account/{id}")]
+        [Route("api/notification/{id}")]
         [HttpGet]
         public ActionResult GetAccountById(long id)
         {
-            Account account = _service.Get(id);
-            if (account == null)
+            Notification notification = _service.Get(id);
+            if (notification == null)
                 return BadRequest();
 
-            return new JsonResult(account);
+            return new JsonResult(notification);
         }
 
-        [Route("api/account/add")]
+        [Route("api/notification/add")]
         [HttpPost]
-        public ActionResult AddAccount(AddAccount dto)
+        public ActionResult AddAccount(Notification notification)
         {
-            int result = _service.Add(dto);
+            /*var newAcc = new Account
+            {
+                Username = account.Username,
+                Password = BCrypt.Net.BCrypt.HashPassword(account.Password),
+                Email = account.Email
+            };*/
+            int result = _service.Add(notification);
             if (result > 0)
                 return Ok();
             return BadRequest();
         }
 
-        [Route("api/account/edit/{id}")]
+        [Route("api/notification/edit/{id}")]
         [HttpPut]
-        public ActionResult UpdateAccount(long id, Account account)
+        public ActionResult UpdateAccount(long id, Notification notification)
         {
             if (ModelState.IsValid)
             {
-                int res = _service.UpdateById(id, account);
+                int res = _service.UpdateById(id, notification);
                 if (res > 0) return Ok();
                 else return BadRequest();
             }
             return BadRequest();
         }
 
-        [Route("api/account/delete/{id}")]
+        [Route("api/notification/delete/{id}")]
         [HttpDelete]
         public ActionResult DeleteAccount(long id)
         {

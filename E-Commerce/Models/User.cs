@@ -6,18 +6,18 @@
         private int gender;
         private string phone;
         private Account account;
-        private Guid? accountId;
+        private long? accountId;
         private Store store;
-        private Guid? storeId;
-        private ICollection<Photo> photos;
+        private long? storeId;
+        private string photo;
 
         public string Name { get => name; set => name = value; }
         public int Gender { get => gender; set => gender = value; }
         public string Phone { get => phone; set => phone = value; }
         public Account Account { get => account; set => account = value; }
-        public Guid? AccountId { get => accountId; set => accountId = value; }
+        public long? AccountId { get => accountId; set => accountId = value; }
         public Store Store { get => store; set => store = value; }
-        public Guid? StoreId { get => storeId; set => storeId = value; }
-        public ICollection<Photo> Photos { get => photos; set => photos = value; }
+        public long? StoreId { get => storeId; set => storeId = value; }
+        public string Photo { get => photo; set => photo = value; }
     }
 }

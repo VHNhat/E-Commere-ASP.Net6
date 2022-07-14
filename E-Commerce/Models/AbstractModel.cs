@@ -7,11 +7,11 @@ namespace E_Commerce.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        private Guid id;
-        private DateTime createdAt;
-        private DateTime lastModifiedAt;
+        private long id;
+        private DateTime createdAt = DateTime.Now;
+        private DateTime lastModifiedAt = DateTime.Now;
 
-        public Guid Id { get => id; set => id = value; }
+        public long Id { get => id; set => id = value; }
         public DateTime CreatedAt { get => createdAt; set => createdAt = value; }
         public DateTime LastModifiedAt { get => lastModifiedAt; set => lastModifiedAt = value; }
     }

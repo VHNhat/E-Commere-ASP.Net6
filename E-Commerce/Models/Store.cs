@@ -9,7 +9,7 @@
 
         private ICollection<Product_Store> product_stores;
         private ICollection<User> users;
-        private ICollection<Photo> photos;
+        private string photo;
 
         public string Name { get => name; set => name = value; }
         public string Address { get => address; set => address = value; }
@@ -17,6 +17,6 @@
         public string Detail { get => detail; set => detail = value; }
         public ICollection<Product_Store> Product_stores { get => product_stores; set => product_stores = value; }
         public ICollection<User> Users { get => users; set => users = value; }
-        public ICollection<Photo> Photos { get => photos; set => photos = value; }
+        public string Photo { get => photo; set => photo = value; }
     }
 }
