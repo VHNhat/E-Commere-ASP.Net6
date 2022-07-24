@@ -72,10 +72,10 @@ namespace E_Commerce.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2022, 7, 24, 18, 55, 11, 777, DateTimeKind.Local).AddTicks(6616),
+                            CreatedAt = new DateTime(2022, 7, 24, 19, 34, 49, 955, DateTimeKind.Local).AddTicks(733),
                             Email = "nhat@gmail.com",
-                            LastModifiedAt = new DateTime(2022, 7, 24, 18, 55, 11, 777, DateTimeKind.Local).AddTicks(7164),
-                            Password = "123",
+                            LastModifiedAt = new DateTime(2022, 7, 24, 19, 34, 49, 955, DateTimeKind.Local).AddTicks(1580),
+                            Password = "$2a$11$xdvLuNvciXF.ShZFYc9twe7IyOBoOLURsjjDBD8uSSAIQWZsaJ/WC",
                             RoleId = 1L,
                             UserId = 1L,
                             Username = "admin"
@@ -519,11 +519,11 @@ namespace E_Commerce.Migrations
                         {
                             Id = 1L,
                             Address = "address",
-                            CreatedAt = new DateTime(2022, 7, 24, 18, 55, 11, 779, DateTimeKind.Local).AddTicks(8148),
+                            CreatedAt = new DateTime(2022, 7, 24, 19, 34, 50, 202, DateTimeKind.Local).AddTicks(3207),
                             Detail = "detail",
                             Email = "email@gmail.com",
                             IsCompany = true,
-                            LastModifiedAt = new DateTime(2022, 7, 24, 18, 55, 11, 779, DateTimeKind.Local).AddTicks(8149),
+                            LastModifiedAt = new DateTime(2022, 7, 24, 19, 34, 50, 202, DateTimeKind.Local).AddTicks(3208),
                             Name = "name",
                             Phone = "0900000000",
                             Photo = "photo",
@@ -950,8 +950,8 @@ namespace E_Commerce.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2022, 7, 24, 18, 55, 11, 779, DateTimeKind.Local).AddTicks(3864),
-                            LastModifiedAt = new DateTime(2022, 7, 24, 18, 55, 11, 779, DateTimeKind.Local).AddTicks(3865),
+                            CreatedAt = new DateTime(2022, 7, 24, 19, 34, 50, 201, DateTimeKind.Local).AddTicks(9021),
+                            LastModifiedAt = new DateTime(2022, 7, 24, 19, 34, 50, 201, DateTimeKind.Local).AddTicks(9022),
                             Name = "admin"
                         });
                 });
@@ -1062,10 +1062,10 @@ namespace E_Commerce.Migrations
                             Id = 1L,
                             AccountId = 1L,
                             Avatar = "photo.png",
-                            CreatedAt = new DateTime(2022, 7, 24, 18, 55, 11, 779, DateTimeKind.Local).AddTicks(5057),
+                            CreatedAt = new DateTime(2022, 7, 24, 19, 34, 50, 202, DateTimeKind.Local).AddTicks(225),
                             FullName = "Võ Hoàng Nhật",
                             Gender = 1,
-                            LastModifiedAt = new DateTime(2022, 7, 24, 18, 55, 11, 779, DateTimeKind.Local).AddTicks(5058),
+                            LastModifiedAt = new DateTime(2022, 7, 24, 19, 34, 50, 202, DateTimeKind.Local).AddTicks(225),
                             OrganizerId = 1L,
                             Phone = "0942400722"
                         });

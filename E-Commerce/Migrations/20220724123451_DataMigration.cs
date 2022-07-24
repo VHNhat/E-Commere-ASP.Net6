@@ -782,6 +782,26 @@ namespace E_Commerce.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Role",
+                columns: new[] { "Id", "CreatedAt", "LastModifiedAt", "Name" },
+                values: new object[] { 1L, new DateTime(2022, 7, 24, 19, 34, 50, 201, DateTimeKind.Local).AddTicks(9021), new DateTime(2022, 7, 24, 19, 34, 50, 201, DateTimeKind.Local).AddTicks(9022), "admin" });
+
+            migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "Id", "AccountId", "Avatar", "CreatedAt", "FullName", "Gender", "LastModifiedAt", "OrganizerId", "Phone" },
+                values: new object[] { 1L, 1L, "photo.png", new DateTime(2022, 7, 24, 19, 34, 50, 202, DateTimeKind.Local).AddTicks(225), "Võ Hoàng Nhật", 1, new DateTime(2022, 7, 24, 19, 34, 50, 202, DateTimeKind.Local).AddTicks(225), 1L, "0942400722" });
+
+            migrationBuilder.InsertData(
+                table: "Account",
+                columns: new[] { "Id", "CreatedAt", "Email", "LastModifiedAt", "Password", "RoleId", "UserId", "Username" },
+                values: new object[] { 1L, new DateTime(2022, 7, 24, 19, 34, 49, 955, DateTimeKind.Local).AddTicks(733), "nhat@gmail.com", new DateTime(2022, 7, 24, 19, 34, 49, 955, DateTimeKind.Local).AddTicks(1580), "$2a$11$xdvLuNvciXF.ShZFYc9twe7IyOBoOLURsjjDBD8uSSAIQWZsaJ/WC", 1L, 1L, "admin" });
+
+            migrationBuilder.InsertData(
+                table: "Organizer",
+                columns: new[] { "Id", "Address", "CreatedAt", "Detail", "Email", "IsCompany", "LastModifiedAt", "Name", "Phone", "Photo", "UserId" },
+                values: new object[] { 1L, "address", new DateTime(2022, 7, 24, 19, 34, 50, 202, DateTimeKind.Local).AddTicks(3207), "detail", "email@gmail.com", true, new DateTime(2022, 7, 24, 19, 34, 50, 202, DateTimeKind.Local).AddTicks(3208), "name", "0900000000", "photo", 1L });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Account_Email",
                 table: "Account",

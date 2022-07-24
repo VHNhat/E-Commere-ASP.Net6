@@ -5,10 +5,13 @@ using E_Commerce.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace E_Commerce.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class AccountController : ControllerBase
     {
@@ -25,6 +28,7 @@ namespace E_Commerce.Controllers
 
         [Route("account")]
         [HttpGet]
+        [Authorize]
         public ActionResult GetAllAccount()
         {
             List<Account> accounts = _service.GetAll();
@@ -74,6 +78,72 @@ namespace E_Commerce.Controllers
             int res = _service.Delete(id);
             if (res > 0) return Ok();
             else return BadRequest();
+        }
+
+
+        [Route("admin/login")]
+        [HttpPost]
+        public ActionResult Login(AdminLoginDto dto)
+        {
+            Account result = _service.Login(dto);
+
+            if (result == null)
+            {
+                return new JsonResult("Username or Password is invalid.");
+            }
+            if (!BCrypt.Net.BCrypt.Verify(dto.Password, result.Password))
+            {
+                return BadRequest(new { message = "Invalid Credentials" });
+            }
+
+            var token = CreateToken(result);
+
+            Response.Cookies.Append("Jwt-EcommercePUNH", token, new CookieOptions
+            {
+                HttpOnly = true
+            });
+            return new JsonResult(new { Token = token });
+        }
+
+        [Route("admin/register")]
+        [HttpPost]
+        public ActionResult Register(AdminSignupDto dto)
+        {
+            string res = _service.Register(dto);
+            if (res == "1") return Ok();
+            else return new JsonResult(res);
+        }
+
+        [Route("admin/logout")]
+        [HttpPost]
+        public ActionResult Logout()
+        {
+            Response.Cookies.Delete("Jwt-EcommercePUNH");
+            return Ok(new { message = "Đã đăng xuất" });
+        }
+
+        private string CreateToken(Account account)
+        {
+            List<Claim> claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, account.Username),
+                new Claim(ClaimTypes.Email, account.Email),
+                new Claim(ClaimTypes.Role, account.RoleId.ToString()),
+            };
+
+            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
+                _config.GetSection("AppSettings:Token").Value));
+
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+            var token = new JwtSecurityToken(
+                claims: claims,
+                expires: DateTime.Now.AddDays(1),
+                signingCredentials: creds);
+
+            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return jwt;
         }
     }
 }

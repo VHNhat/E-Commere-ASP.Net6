@@ -19,7 +19,7 @@ namespace E_Commerce.Extension
                     CreatedAt = DateTime.Now,
                     LastModifiedAt = DateTime.Now,
                     Username = "admin",
-                    Password = "123",
+                    Password = BCrypt.Net.BCrypt.HashPassword("123"),
                     Email = "nhat@gmail.com",
                     RoleId = 1,
                     UserId = 1,

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Commerce.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220724113724_DataMigration")]
+    [Migration("20220724123451_DataMigration")]
     partial class DataMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -69,6 +69,19 @@ namespace E_Commerce.Migrations
                         .IsUnique();
 
                     b.ToTable("Account");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            CreatedAt = new DateTime(2022, 7, 24, 19, 34, 49, 955, DateTimeKind.Local).AddTicks(733),
+                            Email = "nhat@gmail.com",
+                            LastModifiedAt = new DateTime(2022, 7, 24, 19, 34, 49, 955, DateTimeKind.Local).AddTicks(1580),
+                            Password = "$2a$11$xdvLuNvciXF.ShZFYc9twe7IyOBoOLURsjjDBD8uSSAIQWZsaJ/WC",
+                            RoleId = 1L,
+                            UserId = 1L,
+                            Username = "admin"
+                        });
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Banner", b =>
@@ -502,6 +515,22 @@ namespace E_Commerce.Migrations
                         .IsUnique();
 
                     b.ToTable("Organizer");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Address = "address",
+                            CreatedAt = new DateTime(2022, 7, 24, 19, 34, 50, 202, DateTimeKind.Local).AddTicks(3207),
+                            Detail = "detail",
+                            Email = "email@gmail.com",
+                            IsCompany = true,
+                            LastModifiedAt = new DateTime(2022, 7, 24, 19, 34, 50, 202, DateTimeKind.Local).AddTicks(3208),
+                            Name = "name",
+                            Phone = "0900000000",
+                            Photo = "photo",
+                            UserId = 1L
+                        });
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Permission", b =>
@@ -918,6 +947,15 @@ namespace E_Commerce.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Role");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            CreatedAt = new DateTime(2022, 7, 24, 19, 34, 50, 201, DateTimeKind.Local).AddTicks(9021),
+                            LastModifiedAt = new DateTime(2022, 7, 24, 19, 34, 50, 201, DateTimeKind.Local).AddTicks(9022),
+                            Name = "admin"
+                        });
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Size", b =>
@@ -1019,6 +1057,20 @@ namespace E_Commerce.Migrations
                         .IsUnique();
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            AccountId = 1L,
+                            Avatar = "photo.png",
+                            CreatedAt = new DateTime(2022, 7, 24, 19, 34, 50, 202, DateTimeKind.Local).AddTicks(225),
+                            FullName = "Võ Hoàng Nhật",
+                            Gender = 1,
+                            LastModifiedAt = new DateTime(2022, 7, 24, 19, 34, 50, 202, DateTimeKind.Local).AddTicks(225),
+                            OrganizerId = 1L,
+                            Phone = "0942400722"
+                        });
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Voucher", b =>

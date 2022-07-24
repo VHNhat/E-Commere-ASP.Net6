@@ -107,12 +107,12 @@ namespace E_Commerce.DataAccess
                     .OnDelete(DeleteBehavior.SetNull);
 
                 entity.Property(e => e.UserId)
-                    .IsRequired(false);
+                    .IsRequired(true);
 
                 entity.HasOne<User>(o => o.User)
                     .WithOne(o => o.Account)
                     .HasForeignKey<User>(fk => fk.AccountId)
-                    .OnDelete(DeleteBehavior.SetNull);
+                    .OnDelete(DeleteBehavior.Cascade);
                     
             });
             #endregion
