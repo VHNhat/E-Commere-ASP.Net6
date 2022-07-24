@@ -1,6 +1,6 @@
 ﻿namespace E_Commerce.Models
 {
-    public class Option_Role
+    public class Permission
     {
         private long optionId;
         private long roleId;

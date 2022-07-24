@@ -311,7 +311,7 @@ namespace E_Commerce.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
+                    FullName = table.Column<string>(type: "text", nullable: false),
                     Gender = table.Column<int>(type: "int", nullable: false),
                     Phone = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: false),
                     AccountId = table.Column<long>(type: "bigint", nullable: true),
@@ -532,7 +532,7 @@ namespace E_Commerce.Migrations
                 {
                     ShoppingCartId = table.Column<long>(type: "bigint", nullable: false),
                     ProductId = table.Column<long>(type: "bigint", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false, defaultValue: new DateTime(2022, 7, 14, 17, 11, 22, 980, DateTimeKind.Local).AddTicks(3626)),
+                    CreatedDate = table.Column<DateTime>(type: "datetime", nullable: false, defaultValue: new DateTime(2022, 7, 20, 9, 17, 21, 707, DateTimeKind.Local).AddTicks(1151)),
                     TilteSize = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false, defaultValue: "Nhỏ"),
                     Count = table.Column<int>(type: "int", nullable: false, defaultValue: 0)
                 },

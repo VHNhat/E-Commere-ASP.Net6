@@ -3,14 +3,14 @@
     public class VoucherType : AbstractModel
     {
         private string name;
-        private string description;
+        private string type;
+        private string status;
 
         private ICollection<Voucher> vouchers;
-        private string photo;
 
         public string Name { get => name; set => name = value; }
-        public string Description { get => description; set => description = value; }
+        public string Type { get => type; set => type = value; }
         public ICollection<Voucher> Vouchers { get => vouchers; set => vouchers = value; }
-        public string Photo { get => photo; set => photo = value; }
+        public string Status { get => status; set => status = value; }
     }
 }

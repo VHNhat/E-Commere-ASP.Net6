@@ -2,6 +2,7 @@
 using E_Commerce.Dto;
 using E_Commerce.Models;
 using E_Commerce.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +25,7 @@ namespace E_Commerce.Controllers
 
         [Route("api/account")]
         [HttpGet]
+        [Authorize]
         public ActionResult GetAllAccount()
         {
             List<Account> accounts = _service.GetAll();

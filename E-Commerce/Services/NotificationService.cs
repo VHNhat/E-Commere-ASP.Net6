@@ -23,11 +23,12 @@ namespace E_Commerce.Services
             {
                 Notification noti = ctx.Notifications.Single(s => s.Id == id);
 
-                noti.Name = notification.Name;
+                noti.Title = notification.Title;
                 noti.Content = notification.Content;
-                noti.IsActive = notification.IsActive;
+                noti.Status = notification.Status;
+                noti.ReadAt = notification.ReadAt;
                 noti.LastModifiedAt = DateTime.Now;
-
+                
                 return ctx.SaveChanges();
 
             }

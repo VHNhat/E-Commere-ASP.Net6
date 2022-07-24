@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Commerce.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220714101623_DataSeeding")]
-    partial class DataSeeding
+    [Migration("20220720021722_DataMigration")]
+    partial class DataMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -66,19 +66,6 @@ namespace E_Commerce.Migrations
                         .IsUnique();
 
                     b.ToTable("Account");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreatedAt = new DateTime(2022, 7, 14, 17, 16, 23, 301, DateTimeKind.Local).AddTicks(1738),
-                            Email = "nhat@gmail.com",
-                            LastModifiedAt = new DateTime(2022, 7, 14, 17, 16, 23, 301, DateTimeKind.Local).AddTicks(2056),
-                            Password = "123",
-                            RoleId = 1L,
-                            UserId = 1L,
-                            Username = "admin"
-                        });
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Banner", b =>
@@ -313,27 +300,6 @@ namespace E_Commerce.Migrations
                     b.ToTable("OptionRole");
                 });
 
-            modelBuilder.Entity("E_Commerce.Models.Option_Role", b =>
-                {
-                    b.Property<long>("RoleId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("OptionId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime>("LastModifiedAt")
-                        .HasColumnType("datetime");
-
-                    b.HasKey("RoleId", "OptionId");
-
-                    b.HasIndex("OptionId");
-
-                    b.ToTable("Option_Role");
-                });
-
             modelBuilder.Entity("E_Commerce.Models.Order", b =>
                 {
                     b.Property<long>("Id")
@@ -400,6 +366,27 @@ namespace E_Commerce.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("E_Commerce.Models.Permission", b =>
+                {
+                    b.Property<long>("RoleId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("OptionId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<DateTime>("LastModifiedAt")
+                        .HasColumnType("datetime");
+
+                    b.HasKey("RoleId", "OptionId");
+
+                    b.HasIndex("OptionId");
+
+                    b.ToTable("Option_Role");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Photo", b =>
@@ -653,15 +640,6 @@ namespace E_Commerce.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Role");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreatedAt = new DateTime(2022, 7, 14, 17, 16, 23, 302, DateTimeKind.Local).AddTicks(3686),
-                            LastModifiedAt = new DateTime(2022, 7, 14, 17, 16, 23, 302, DateTimeKind.Local).AddTicks(3687),
-                            Name = "admin"
-                        });
                 });
 
             modelBuilder.Entity("E_Commerce.Models.ShoppingCart", b =>
@@ -707,7 +685,7 @@ namespace E_Commerce.Migrations
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2022, 7, 14, 17, 16, 23, 298, DateTimeKind.Local).AddTicks(6025));
+                        .HasDefaultValue(new DateTime(2022, 7, 20, 9, 17, 21, 707, DateTimeKind.Local).AddTicks(1151));
 
                     b.Property<string>("TilteSize")
                         .IsRequired()
@@ -758,19 +736,6 @@ namespace E_Commerce.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Store");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            Address = "Đặng Thùy Trâm",
-                            CreatedAt = new DateTime(2022, 7, 14, 17, 16, 23, 302, DateTimeKind.Local).AddTicks(6778),
-                            Detail = "cc",
-                            LastModifiedAt = new DateTime(2022, 7, 14, 17, 16, 23, 302, DateTimeKind.Local).AddTicks(6778),
-                            Map = "cc",
-                            Name = "Unny mini house",
-                            Photo = "photo.png"
-                        });
                 });
 
             modelBuilder.Entity("E_Commerce.Models.User", b =>
@@ -785,15 +750,15 @@ namespace E_Commerce.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime");
 
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("LastModifiedAt")
                         .HasColumnType("datetime");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("Phone")
                         .IsRequired()
@@ -815,20 +780,6 @@ namespace E_Commerce.Migrations
                     b.HasIndex("StoreId");
 
                     b.ToTable("User");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            AccountId = 1L,
-                            CreatedAt = new DateTime(2022, 7, 14, 17, 16, 23, 302, DateTimeKind.Local).AddTicks(4532),
-                            Gender = 1,
-                            LastModifiedAt = new DateTime(2022, 7, 14, 17, 16, 23, 302, DateTimeKind.Local).AddTicks(4533),
-                            Name = "Võ Hoàng Nhật",
-                            Phone = "0942400722",
-                            Photo = "photo.png",
-                            StoreId = 1L
-                        });
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Voucher", b =>
@@ -931,7 +882,18 @@ namespace E_Commerce.Migrations
                     b.Navigation("DiscountValue");
                 });
 
-            modelBuilder.Entity("E_Commerce.Models.Option_Role", b =>
+            modelBuilder.Entity("E_Commerce.Models.Order", b =>
+                {
+                    b.HasOne("E_Commerce.Models.Customer", "Customer")
+                        .WithMany("Orders")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("E_Commerce.Models.Permission", b =>
                 {
                     b.HasOne("E_Commerce.Models.OptionRole", "Option")
                         .WithMany("Option_roles")
@@ -948,17 +910,6 @@ namespace E_Commerce.Migrations
                     b.Navigation("Option");
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("E_Commerce.Models.Order", b =>
-                {
-                    b.HasOne("E_Commerce.Models.Customer", "Customer")
-                        .WithMany("Orders")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Photo", b =>

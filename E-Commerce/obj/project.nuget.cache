@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3k3J2nH/7vuDFMW8oSQ93ZvCijh5i8xxGPx3s0+1zomfNoYQ4cximbkXQ+sfmNKuy5kdlvdEMMExJCoxEWFWuQ==",
+  "dgSpecHash": "niU1bl6mfd1WMwbe+l8b1/tSkF9CnkER11fnjt5Q8vOBZo5AIb4za7hkRIWx5So2gWjhsgkmNND02gge16Rj7g==",
   "success": true,
-  "projectFilePath": "E:\\Code Life\\Personal Project\\E-Commere\\E-Commerce\\E-Commerce.csproj",
+  "projectFilePath": "E:\\Code Life\\Personal Project\\Freelance\\E-Commere\\E-Commerce\\E-Commerce.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\vohoa\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\vohoa\\.nuget\\packages\\bouncycastle.netcore\\1.8.5\\bouncycastle.netcore.1.8.5.nupkg.sha512",

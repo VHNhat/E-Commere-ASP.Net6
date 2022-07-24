@@ -44,24 +44,9 @@ namespace E_Commerce.Extension
                     LastModifiedAt = DateTime.Now,
                     AccountId = 1,
                     Gender = 1,
-                    Name = "Võ Hoàng Nhật",
+                    FullName = "Võ Hoàng Nhật",
                     Phone = "0942400722",
-                    Photo = "photo.png",
-                    StoreId = 1,
-                });
-            #endregion
-            #region Store
-            modelBuilder.Entity<Store>().HasData(
-                new Store
-                {
-                    Id = 1,
-                    CreatedAt = DateTime.Now,
-                    LastModifiedAt = DateTime.Now,
-                    Address = "Đặng Thùy Trâm",
-                    Detail = "cc",
-                    Map = "cc",
-                    Name = "Unny mini house",
-                    Photo = "photo.png",
+                    Avatar = "photo.png"
                 });
             #endregion
         }

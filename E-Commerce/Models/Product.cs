@@ -1,35 +1,45 @@
-﻿namespace E_Commerce.Models
+﻿using E_Commerce.Utility.Status;
+
+namespace E_Commerce.Models
 {
     public class Product : AbstractModel
     {
         private string name;
         private string decription;
-        private double price;
-        private int quantity;
+        private string status;
+        private int gender;
 
         private long? brandId;
         private ProductBrand brand;
-        private ICollection<Product_Size> product_sizes;
-        private long? typeId;
-        private ProductType type;
-        private ICollection<Product_Store> product_stores;
-        private ICollection<Photo> photos;
+        private long? categoryId;
+        private ProductCategory category;
+        /*private long? subCategoryId;
+        private ProductCategory subCategory;*/
+        private long? organizerId;
+        private Organizer organizer;
 
-        private ICollection<ShoppingCart_Product> shoppingCart_Products;
+        private ICollection<ProductVariance> variances;
+        private ICollection<Photo> photos;
+        private ICollection<Cart> carts;
         private ICollection<ReviewProduct> reviews;
+        private ICollection<Wishlist_Product> wishlist_Products;
 
         public string Name { get => name; set => name = value; }
         public string Decription { get => decription; set => decription = value; }
-        public double Price { get => price; set => price = value; }
-        public int Quantity { get => quantity; set => quantity = value; }
+        public string Status { get => status; set => status = value; }
+        public int Gender { get => gender; set => gender = value; }
         public long? BrandId { get => brandId; set => brandId = value; }
         public ProductBrand Brand { get => brand; set => brand = value; }
-        public ICollection<Product_Size> Product_sizes { get => product_sizes; set => product_sizes = value; }
-        public long? TypeId { get => typeId; set => typeId = value; }
-        public ProductType Type { get => type; set => type = value; }
-        public ICollection<Product_Store> Product_stores { get => product_stores; set => product_stores = value; }
+        public long? CategoryId { get => categoryId; set => categoryId = value; }
+        public ProductCategory Category { get => category; set => category = value; }
+        /*public long? SubCategoryId { get => subCategoryId; set => subCategoryId = value; }
+        public ProductCategory SubCategory { get => subCategory; set => subCategory = value; }*/
+        public long? OrganizerId { get => organizerId; set => organizerId = value; }
+        public Organizer Organizer { get => organizer; set => organizer = value; }
+        public ICollection<ProductVariance> Variances { get => variances; set => variances = value; }
         public ICollection<Photo> Photos { get => photos; set => photos = value; }
+        public ICollection<Cart> Carts { get => carts; set => carts = value; }
         public ICollection<ReviewProduct> Reviews { get => reviews; set => reviews = value; }
-        public ICollection<ShoppingCart_Product> ShoppingCart_Products { get => shoppingCart_Products; set => shoppingCart_Products = value; }
+        public ICollection<Wishlist_Product> Wishlist_Products { get => wishlist_Products; set => wishlist_Products = value; }
     }
 }

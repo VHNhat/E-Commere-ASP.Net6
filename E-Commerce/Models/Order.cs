@@ -2,30 +2,31 @@
 {
     public class Order : AbstractModel
     {
-        private long? customerId;
-        private int validated;
+        private double subTotal;
+        private double shippingCost;
+        private string paymentMethod;
+        private string paymentStatus;
         private string status;
-        
-        private string address;
-        private string name;
-        private string phone;
-        private string time;
-        private string payBy;
-        private string note;
-        
-        private long totalPrice;
-        private Customer customer;
+        private double total;
 
-        public long? CustomerId { get => customerId; set => customerId = value; }
-        public int Validated { get => validated; set => validated = value; }
+        private long? customerId;
+        private Customer customer;
+        private long? voucherId;
+        private Voucher voucher;
+        private long? receiverId;
+        private Receiver receiver;
+
+        public double SubTotal { get => subTotal; set => subTotal = value; }
+        public double ShippingCost { get => shippingCost; set => shippingCost = value; }
+        public string PaymentMethod { get => paymentMethod; set => paymentMethod = value; }
+        public string PaymentStatus { get => paymentStatus; set => paymentStatus = value; }
         public string Status { get => status; set => status = value; }
-        public string Address { get => address; set => address = value; }
-        public string Name { get => name; set => name = value; }
-        public string Phone { get => phone; set => phone = value; }
-        public string Time { get => time; set => time = value; }
-        public string PayBy { get => payBy; set => payBy = value; }
-        public string Note { get => note; set => note = value; }
-        public long TotalPrice { get => totalPrice; set => totalPrice = value; }
+        public double Total { get => total; set => total = value; }
+        public long? CustomerId { get => customerId; set => customerId = value; }
         public Customer Customer { get => customer; set => customer = value; }
+        public long? VoucherId { get => voucherId; set => voucherId = value; }
+        public Voucher Voucher { get => voucher; set => voucher = value; }
+        public long? ReceiverId { get => receiverId; set => receiverId = value; }
+        public Receiver Receiver { get => receiver; set => receiver = value; }
     }
 }
