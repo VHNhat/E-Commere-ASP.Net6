@@ -22,7 +22,7 @@ namespace E_Commerce.Extension
                     Password = "123",
                     Email = "nhat@gmail.com",
                     RoleId = 1,
-                    UserId = 1
+                    UserId = 1,
                 });
             #endregion
             #region Role
@@ -32,7 +32,7 @@ namespace E_Commerce.Extension
                     Id = 1,
                     CreatedAt = DateTime.Now,
                     LastModifiedAt = DateTime.Now,
-                    Name = "admin"
+                    Name = "admin",                    
                 });
             #endregion
             #region User
@@ -46,8 +46,27 @@ namespace E_Commerce.Extension
                     Gender = 1,
                     FullName = "Võ Hoàng Nhật",
                     Phone = "0942400722",
-                    Avatar = "photo.png"
+                    Avatar = "photo.png",
+                    OrganizerId = 1,                    
                 });
+            #endregion
+            #region Organizer
+            modelBuilder.Entity<Organizer>().HasData(
+                new Organizer()
+                {
+                    Id = 1,
+                    CreatedAt = DateTime.Now,
+                    LastModifiedAt = DateTime.Now,
+                    Address = "address",
+                    Detail = "detail",
+                    Email = "email@gmail.com",
+                    IsCompany = true,
+                    Name = "name",
+                    Phone = "0900000000",
+                    Photo = "photo",
+                    UserId = 1
+                }
+                );
             #endregion
         }
     }

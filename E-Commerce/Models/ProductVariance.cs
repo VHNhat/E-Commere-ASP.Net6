@@ -13,6 +13,8 @@
         private Product product;
 
         private ICollection<ReviewProduct> reviews;
+        private ICollection<ProductDetail> details;
+
         public string Name { get => name; set => name = value; }
         public string Description { get => description; set => description = value; }
         public string Photo { get => photo; set => photo = value; }
@@ -22,5 +24,6 @@
         public long? ProductId { get => productId; set => productId = value; }
         public Product Product { get => product; set => product = value; }
         public ICollection<ReviewProduct> Reviews { get => reviews; set => reviews = value; }
+        public ICollection<ProductDetail> Details { get => details; set => details = value; }
     }
 }

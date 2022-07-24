@@ -23,6 +23,8 @@ namespace E_Commerce.Models
         private ICollection<Cart> carts;
         private ICollection<ReviewProduct> reviews;
         private ICollection<Wishlist_Product> wishlist_Products;
+        private ICollection<ProductDetail> productDetails;
+        private ICollection<CartProduct> cartProducts;
 
         public string Name { get => name; set => name = value; }
         public string Decription { get => decription; set => decription = value; }
@@ -41,5 +43,7 @@ namespace E_Commerce.Models
         public ICollection<Cart> Carts { get => carts; set => carts = value; }
         public ICollection<ReviewProduct> Reviews { get => reviews; set => reviews = value; }
         public ICollection<Wishlist_Product> Wishlist_Products { get => wishlist_Products; set => wishlist_Products = value; }
+        public ICollection<ProductDetail> ProductDetails { get => productDetails; set => productDetails = value; }
+        public ICollection<CartProduct> CartProducts { get => cartProducts; set => cartProducts = value; }
     }
 }

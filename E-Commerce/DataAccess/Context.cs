@@ -32,7 +32,7 @@ namespace E_Commerce.DataAccess
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Banner> Banners { get; set; }
         public DbSet<Cart> Carts { get; set; }
-        public DbSet<CartDetail> CartDetails { get; set; }
+        public DbSet<CartProduct> CartDetails { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Discount> Discounts { get; set; }
         public DbSet<DiscountType> DiscountTypes { get; set; }
@@ -46,6 +46,7 @@ namespace E_Commerce.DataAccess
         public DbSet<ProductBrand> ProductBrands { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<ProductDetail> ProductDetails { get; set; }
+        public DbSet<ProductVariance> ProductVariances { get; set; }
         public DbSet<Receiver> Receivers { get; set; }
         public DbSet<ReviewProduct> ReviewProducts { get; set; }
         public DbSet<Role> Roles { get; set; }
@@ -140,7 +141,8 @@ namespace E_Commerce.DataAccess
                     .IsRequired(true);
 
                 entity.Property(e => e.Status)
-                    .HasDefaultValue(BannerStatus.ACTIVE);
+                    .IsRequired();
+                    /*.HasDefaultValue(BannerStatus.ACTIVE.ToString())*/
 
             });
             #endregion
@@ -175,19 +177,25 @@ namespace E_Commerce.DataAccess
             });
             #endregion
             #region CartDetail
-            modelBuilder.Entity<CartDetail>(entity => 
+            modelBuilder.Entity<CartProduct>(entity => 
             {
-                entity.ToTable("CartDetail").
-                    HasKey(e => new { e.CartId, e.ProductDetailId});
+                entity.ToTable("CartProduct").
+                    HasKey(e => new { e.CartId, e.ProductId});
+
+                entity.Property(e => e.CartId)
+                    .IsRequired(true);
 
                 entity.HasOne<Cart>(o => o.Cart)
                     .WithMany(m => m.CartDetails)
                     .HasForeignKey(fk => fk.CartId)
                     .OnDelete(DeleteBehavior.Cascade);
 
-                entity.HasOne<ProductDetail>(o => o.ProductDetail)
-                    .WithMany(m => m.CartDetails)
-                    .HasForeignKey(fk => fk.ProductDetailId)
+                entity.Property(e => e.ProductId)
+                    .IsRequired(true);
+
+                entity.HasOne<Product>(o => o.Product)
+                    .WithMany(m => m.CartProducts)
+                    .HasForeignKey(fk => fk.ProductId)
                     .OnDelete(DeleteBehavior.Cascade);
             });
             #endregion
@@ -280,7 +288,8 @@ namespace E_Commerce.DataAccess
                     .IsRequired(true);
 
                 entity.Property(e => e.Status)
-                    .HasDefaultValue(DiscountStatus.ACTIVE);
+                    .IsRequired();
+                    /*.HasDefaultValue(DiscountStatus.ACTIVE);*/
 
                 entity.Property(e => e.Value)
                     .HasDefaultValue(0);
@@ -327,10 +336,12 @@ namespace E_Commerce.DataAccess
                     .IsRequired(true);
 
                 entity.Property(e => e.Status)
-                    .HasDefaultValue(DiscountTypeStatus.ACTIVE);
+                    .IsRequired();
+                    /*.HasDefaultValue(DiscountTypeStatus.ACTIVE);*/
 
                 entity.Property(e => e.Type)
-                    .HasDefaultValue(TypeDiscount.NONE);
+                    .IsRequired();
+                    /*.HasDefaultValue(TypeDiscount.NONE);*/
 
             });
             #endregion
@@ -356,10 +367,12 @@ namespace E_Commerce.DataAccess
                     .IsRequired(true);
 
                 entity.Property(e => e.Type)
-                    .HasDefaultValue(TypeNotification.ACTIVE);
+                    .IsRequired();
+                    /*.HasDefaultValue(TypeNotification.ACTIVE);*/
 
                 entity.Property(e => e.Status)
-                    .HasDefaultValue(NotificationStatus.ACTIVE);
+                    .IsRequired();
+                    /*.HasDefaultValue(NotificationStatus.ACTIVE);*/
 
                 entity.Property(e => e.ReadAt)
                     .IsRequired();
@@ -412,7 +425,8 @@ namespace E_Commerce.DataAccess
                     .IsRequired(true);
 
                 entity.Property(e => e.Status)
-                    .HasDefaultValue(OrderStatus.PENDING);
+                    .IsRequired();
+                    /*.HasDefaultValue(OrderStatus.PENDING);*/
 
                 entity.Property(e => e.Total)
                     .IsRequired(true);
@@ -557,7 +571,8 @@ namespace E_Commerce.DataAccess
                     .IsRequired(true);
 
                 entity.Property(e => e.Status)
-                    .HasDefaultValue(ProductStatus.NORMAL);
+                    .IsRequired();
+                    /*.HasDefaultValue(ProductStatus.NORMAL);*/
 
                 entity.Property(e => e.Gender)
                     .HasDefaultValue(-1);
@@ -687,7 +702,8 @@ namespace E_Commerce.DataAccess
                     .IsRequired(true);
 
                 entity.Property(e => e.Status)
-                    .HasDefaultValue(ProductDetailStatus.NORMAL);
+                    .IsRequired();
+                    /*.HasDefaultValue(ProductDetailStatus.NORMAL);*/
 
                 entity.Property(e => e.Photo)
                     .IsRequired(false);
@@ -699,6 +715,30 @@ namespace E_Commerce.DataAccess
                     .WithMany(m => m.ProductDetails)
                     .HasForeignKey(fk => fk.DiscountId)
                     .OnDelete(DeleteBehavior.SetNull);
+
+                entity.Property(e => e.ProductId)
+                    .IsRequired(true);
+
+                entity.HasOne<Product>(o => o.Product)
+                    .WithMany(m => m.ProductDetails)
+                    .HasForeignKey(fk => fk.ProductId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.Property(e => e.ProductVarianceId)
+                    .IsRequired(true);
+
+                entity.HasOne<ProductVariance>(o => o.ProductVariance)
+                    .WithMany(m => m.Details)
+                    .HasForeignKey(fk => fk.ProductVarianceId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+                entity.Property(e => e.SizeId)
+                    .IsRequired(true);
+
+                entity.HasOne<Size>(o => o.ProductSize)
+                    .WithMany(m => m.ProductDetails)
+                    .HasForeignKey(fk => fk.SizeId)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
             #endregion
             #region ProductVariance
@@ -902,7 +942,8 @@ namespace E_Commerce.DataAccess
                     .IsRequired(true);
 
                 entity.Property(e => e.Status)
-                    .HasDefaultValue(SizeStatus.NONE);
+                    .IsRequired();
+                    /*.HasDefaultValue(SizeStatus.NONE);*/
 
                 entity.Property(e => e.SizeCategoryId)
                     .IsRequired(false);
@@ -992,7 +1033,8 @@ namespace E_Commerce.DataAccess
                     .IsRequired(true);
 
                 entity.Property(e => e.Status)
-                    .HasDefaultValue(VoucherStatus.ACTIVE);
+                    .IsRequired();
+                    /*.HasDefaultValue(VoucherStatus.ACTIVE);*/
 
                 entity.Property(e => e.OrganizerId)
                     .IsRequired(false);
@@ -1029,10 +1071,12 @@ namespace E_Commerce.DataAccess
                     .IsRequired(true);
 
                 entity.Property(e => e.Type)
-                    .HasDefaultValue(TypeVoucher.NONE);
+                    .IsRequired();
+                    /*.HasDefaultValue(TypeVoucher.NONE);*/
 
                 entity.Property(e => e.Status)
-                    .HasDefaultValue(VoucherTypeStatus.ACTIVE);
+                    .IsRequired();
+                    /*.HasDefaultValue(VoucherTypeStatus.ACTIVE);*/
 
             });
             #endregion
@@ -1087,11 +1131,8 @@ namespace E_Commerce.DataAccess
             });
             #endregion
 
-
-
-
             // Seeding data
-            /*modelBuilder.Seed();*/
+            modelBuilder.Seed();
         }
     }
 }

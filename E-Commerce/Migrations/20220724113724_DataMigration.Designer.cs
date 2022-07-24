@@ -3,14 +3,16 @@ using System;
 using E_Commerce.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace E_Commerce.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220724113724_DataMigration")]
+    partial class DataMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,19 +69,6 @@ namespace E_Commerce.Migrations
                         .IsUnique();
 
                     b.ToTable("Account");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreatedAt = new DateTime(2022, 7, 24, 18, 55, 11, 777, DateTimeKind.Local).AddTicks(6616),
-                            Email = "nhat@gmail.com",
-                            LastModifiedAt = new DateTime(2022, 7, 24, 18, 55, 11, 777, DateTimeKind.Local).AddTicks(7164),
-                            Password = "123",
-                            RoleId = 1L,
-                            UserId = 1L,
-                            Username = "admin"
-                        });
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Banner", b =>
@@ -513,22 +502,6 @@ namespace E_Commerce.Migrations
                         .IsUnique();
 
                     b.ToTable("Organizer");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            Address = "address",
-                            CreatedAt = new DateTime(2022, 7, 24, 18, 55, 11, 779, DateTimeKind.Local).AddTicks(8148),
-                            Detail = "detail",
-                            Email = "email@gmail.com",
-                            IsCompany = true,
-                            LastModifiedAt = new DateTime(2022, 7, 24, 18, 55, 11, 779, DateTimeKind.Local).AddTicks(8149),
-                            Name = "name",
-                            Phone = "0900000000",
-                            Photo = "photo",
-                            UserId = 1L
-                        });
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Permission", b =>
@@ -945,15 +918,6 @@ namespace E_Commerce.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Role");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            CreatedAt = new DateTime(2022, 7, 24, 18, 55, 11, 779, DateTimeKind.Local).AddTicks(3864),
-                            LastModifiedAt = new DateTime(2022, 7, 24, 18, 55, 11, 779, DateTimeKind.Local).AddTicks(3865),
-                            Name = "admin"
-                        });
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Size", b =>
@@ -1055,20 +1019,6 @@ namespace E_Commerce.Migrations
                         .IsUnique();
 
                     b.ToTable("User");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1L,
-                            AccountId = 1L,
-                            Avatar = "photo.png",
-                            CreatedAt = new DateTime(2022, 7, 24, 18, 55, 11, 779, DateTimeKind.Local).AddTicks(5057),
-                            FullName = "Võ Hoàng Nhật",
-                            Gender = 1,
-                            LastModifiedAt = new DateTime(2022, 7, 24, 18, 55, 11, 779, DateTimeKind.Local).AddTicks(5058),
-                            OrganizerId = 1L,
-                            Phone = "0942400722"
-                        });
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Voucher", b =>

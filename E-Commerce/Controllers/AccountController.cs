@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce.Controllers
 {
-    /*[Route("api/[controller]")]*/
+    [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
     {
@@ -23,9 +23,8 @@ namespace E_Commerce.Controllers
             _service = new AccountService(_config, ctx);
         }
 
-        [Route("api/account")]
+        [Route("account")]
         [HttpGet]
-        [Authorize]
         public ActionResult GetAllAccount()
         {
             List<Account> accounts = _service.GetAll();
@@ -34,7 +33,7 @@ namespace E_Commerce.Controllers
 
             return new JsonResult(accounts);
         }
-        [Route("api/account/{id}")]
+        [Route("account/{id}")]
         [HttpGet]
         public ActionResult GetAccountById(long id)
         {
@@ -45,7 +44,7 @@ namespace E_Commerce.Controllers
             return new JsonResult(account);
         }
 
-        [Route("api/account/add")]
+        [Route("account/add")]
         [HttpPost]
         public ActionResult AddAccount(AddAccount dto)
         {
@@ -55,7 +54,7 @@ namespace E_Commerce.Controllers
             return BadRequest();
         }
 
-        [Route("api/account/edit/{id}")]
+        [Route("account/edit/{id}")]
         [HttpPut]
         public ActionResult UpdateAccount(long id, Account account)
         {
@@ -68,7 +67,7 @@ namespace E_Commerce.Controllers
             return BadRequest();
         }
 
-        [Route("api/account/delete/{id}")]
+        [Route("account/delete/{id}")]
         [HttpDelete]
         public ActionResult DeleteAccount(long id)
         {
