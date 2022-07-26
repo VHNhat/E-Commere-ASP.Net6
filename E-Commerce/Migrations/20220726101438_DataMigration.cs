@@ -221,7 +221,7 @@ namespace E_Commerce.Migrations
                     Password = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false),
                     Email = table.Column<string>(type: "varchar(100)", unicode: false, maxLength: 100, nullable: false),
                     RoleId = table.Column<long>(type: "bigint", nullable: true),
-                    UserId = table.Column<long>(type: "bigint", nullable: true),
+                    UserId = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
                     LastModifiedAt = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
@@ -239,7 +239,7 @@ namespace E_Commerce.Migrations
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -337,7 +337,7 @@ namespace E_Commerce.Migrations
                     Description = table.Column<string>(type: "text", nullable: false),
                     Status = table.Column<string>(type: "text", nullable: false),
                     Photo = table.Column<string>(type: "text", nullable: false),
-                    OrganizerId = table.Column<long>(type: "bigint", nullable: true),
+                    OrganizerId = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
                     LastModifiedAt = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
@@ -349,7 +349,7 @@ namespace E_Commerce.Migrations
                         column: x => x.OrganizerId,
                         principalTable: "Organizer",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -670,7 +670,6 @@ namespace E_Commerce.Migrations
                     Price = table.Column<double>(type: "double", nullable: false),
                     Status = table.Column<string>(type: "text", nullable: false),
                     Photo = table.Column<string>(type: "text", nullable: true),
-                    Id = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime", nullable: false),
                     LastModifiedAt = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
@@ -783,24 +782,72 @@ namespace E_Commerce.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "OptionRole",
+                columns: new[] { "Id", "CreatedAt", "LastModifiedAt", "Name" },
+                values: new object[,]
+                {
+                    { 1L, new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(8021), new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(8024), "Get" },
+                    { 2L, new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(8028), new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(8028), "Post" },
+                    { 3L, new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(8030), new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(8031), "Put" },
+                    { 4L, new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(8033), new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(8034), "Delete" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Role",
                 columns: new[] { "Id", "CreatedAt", "LastModifiedAt", "Name" },
-                values: new object[] { 1L, new DateTime(2022, 7, 24, 19, 34, 50, 201, DateTimeKind.Local).AddTicks(9021), new DateTime(2022, 7, 24, 19, 34, 50, 201, DateTimeKind.Local).AddTicks(9022), "admin" });
+                values: new object[,]
+                {
+                    { 1L, new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(287), new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(288), "admin" },
+                    { 2L, new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(740), new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(741), "shop-owner" },
+                    { 3L, new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(743), new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(744), "manager" },
+                    { 4L, new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(746), new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(747), "staff" }
+                });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "AccountId", "Avatar", "CreatedAt", "FullName", "Gender", "LastModifiedAt", "OrganizerId", "Phone" },
-                values: new object[] { 1L, 1L, "photo.png", new DateTime(2022, 7, 24, 19, 34, 50, 202, DateTimeKind.Local).AddTicks(225), "Võ Hoàng Nhật", 1, new DateTime(2022, 7, 24, 19, 34, 50, 202, DateTimeKind.Local).AddTicks(225), 1L, "0942400722" });
+                values: new object[,]
+                {
+                    { 1L, 1L, "photo.png", new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(1483), "User 1", 1, new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(1484), 1L, "0000000001" },
+                    { 2L, 2L, "photo.png", new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(4089), "User 2", 0, new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(4090), 2L, "0000000002" },
+                    { 3L, 3L, "photo.png", new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(4094), "User 3", 0, new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(4094), 3L, "0000000003" },
+                    { 4L, 4L, "photo.png", new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(4097), "User 4", 1, new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(4098), 4L, "0000000004" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Account",
                 columns: new[] { "Id", "CreatedAt", "Email", "LastModifiedAt", "Password", "RoleId", "UserId", "Username" },
-                values: new object[] { 1L, new DateTime(2022, 7, 24, 19, 34, 49, 955, DateTimeKind.Local).AddTicks(733), "nhat@gmail.com", new DateTime(2022, 7, 24, 19, 34, 49, 955, DateTimeKind.Local).AddTicks(1580), "$2a$11$xdvLuNvciXF.ShZFYc9twe7IyOBoOLURsjjDBD8uSSAIQWZsaJ/WC", 1L, 1L, "admin" });
+                values: new object[,]
+                {
+                    { 1L, new DateTime(2022, 7, 26, 17, 14, 36, 850, DateTimeKind.Local).AddTicks(3742), "email1@gmail.com", new DateTime(2022, 7, 26, 17, 14, 36, 850, DateTimeKind.Local).AddTicks(4238), "$2a$11$DAcPcRn4NSQz2CjtDpmfFuPeeLKVJnAxnhYxj7kfZ922eyR4UDRj2", 1L, 1L, "account1" },
+                    { 2L, new DateTime(2022, 7, 26, 17, 14, 37, 71, DateTimeKind.Local).AddTicks(8430), "email2@gmail.com", new DateTime(2022, 7, 26, 17, 14, 37, 71, DateTimeKind.Local).AddTicks(8431), "$2a$11$93Vo78iq53DbSZ2PqxMNb.vLEseScXrJhxC727wNco0aPTwEqZyMa", 2L, 2L, "account2" },
+                    { 3L, new DateTime(2022, 7, 26, 17, 14, 37, 290, DateTimeKind.Local).AddTicks(3953), "email3@gmail.com", new DateTime(2022, 7, 26, 17, 14, 37, 290, DateTimeKind.Local).AddTicks(3955), "$2a$11$HXPFJVtmEbgIlwcQDEAuguouqLC8lsz6BeSolfWBqrDUBDtFsCjdi", 3L, 3L, "account3" },
+                    { 4L, new DateTime(2022, 7, 26, 17, 14, 37, 535, DateTimeKind.Local).AddTicks(513), "email4@gmail.com", new DateTime(2022, 7, 26, 17, 14, 37, 535, DateTimeKind.Local).AddTicks(514), "$2a$11$wMk1UqgqEwT0PyqCuQQ05uu93Te.LmHhWrO1q29hCzUX4LcBQk6L6", 4L, 4L, "account4" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Organizer",
                 columns: new[] { "Id", "Address", "CreatedAt", "Detail", "Email", "IsCompany", "LastModifiedAt", "Name", "Phone", "Photo", "UserId" },
-                values: new object[] { 1L, "address", new DateTime(2022, 7, 24, 19, 34, 50, 202, DateTimeKind.Local).AddTicks(3207), "detail", "email@gmail.com", true, new DateTime(2022, 7, 24, 19, 34, 50, 202, DateTimeKind.Local).AddTicks(3208), "name", "0900000000", "photo", 1L });
+                values: new object[,]
+                {
+                    { 1L, "address", new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(4850), "detail", "email@gmail.com", true, new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(4851), "name", "0000000001", "photo", 1L },
+                    { 2L, "address", new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(7150), "detail", "email2@gmail.com", false, new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(7151), "name", "0000000002", "photo", 2L },
+                    { 3L, "address", new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(7155), "detail", "email3@gmail.com", false, new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(7156), "name", "0000000003", "photo", 3L },
+                    { 4L, "address", new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(7159), "detail", "email4@gmail.com", true, new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(7159), "name", "0000000004", "photo", 4L }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Permission",
+                columns: new[] { "OptionId", "RoleId", "CreatedAt", "LastModifiedAt" },
+                values: new object[,]
+                {
+                    { 1L, 1L, new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(8595), new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(8950) },
+                    { 2L, 1L, new DateTime(2022, 7, 26, 17, 14, 37, 751, DateTimeKind.Local).AddTicks(116), new DateTime(2022, 7, 26, 17, 14, 37, 751, DateTimeKind.Local).AddTicks(119) },
+                    { 3L, 1L, new DateTime(2022, 7, 26, 17, 14, 37, 751, DateTimeKind.Local).AddTicks(120), new DateTime(2022, 7, 26, 17, 14, 37, 751, DateTimeKind.Local).AddTicks(121) },
+                    { 4L, 1L, new DateTime(2022, 7, 26, 17, 14, 37, 751, DateTimeKind.Local).AddTicks(122), new DateTime(2022, 7, 26, 17, 14, 37, 751, DateTimeKind.Local).AddTicks(123) },
+                    { 1L, 2L, new DateTime(2022, 7, 26, 17, 14, 37, 751, DateTimeKind.Local).AddTicks(124), new DateTime(2022, 7, 26, 17, 14, 37, 751, DateTimeKind.Local).AddTicks(125) },
+                    { 2L, 2L, new DateTime(2022, 7, 26, 17, 14, 37, 751, DateTimeKind.Local).AddTicks(126), new DateTime(2022, 7, 26, 17, 14, 37, 751, DateTimeKind.Local).AddTicks(126) }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Account_Email",

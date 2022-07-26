@@ -2,6 +2,7 @@
 using E_Commerce.Dto;
 using E_Commerce.Models;
 using E_Commerce.Services;
+using E_Commerce.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,12 +18,12 @@ namespace E_Commerce.Controllers
     {
         private readonly IConfiguration _config;
         private readonly AccountService _service;
-        private readonly Context context;
+        private readonly Context _ctx;
 
         public AccountController(IConfiguration config, Context ctx)
         {
             _config = config;
-            context = ctx;
+            _ctx = ctx;
             _service = new AccountService(_config, ctx);
         }
 
@@ -33,51 +34,71 @@ namespace E_Commerce.Controllers
         {
             List<Account> accounts = _service.GetAll();
             if (accounts.Count == 0)
-                return new JsonResult("There is no data");
-
-            return new JsonResult(accounts);
+            {
+                return Ok(new ResponseEntity("There is no data", accounts));
+            }
+            return Ok(new ResponseEntity("Get all accounts successfully", accounts));
         }
         [Route("account/{id}")]
         [HttpGet]
+        [Authorize]
         public ActionResult GetAccountById(long id)
         {
             Account account = _service.Get(id);
             if (account == null)
-                return BadRequest();
-
-            return new JsonResult(account);
+            {
+                return BadRequest(new ResponseEntity("There is no data"));
+            }
+            return Ok(new ResponseEntity($"Get account by id = {id} successfully", account));
         }
 
         [Route("account/add")]
         [HttpPost]
+        [Authorize]
         public ActionResult AddAccount(AddAccount dto)
         {
             int result = _service.Add(dto);
             if (result > 0)
-                return Ok();
-            return BadRequest();
+            {
+                return Ok(new ResponseEntity("Add account successfully"));
+            }
+            return BadRequest(new ResponseEntity("Add account failed"));
         }
 
         [Route("account/edit/{id}")]
         [HttpPut]
+        [Authorize]
         public ActionResult UpdateAccount(long id, Account account)
         {
             if (ModelState.IsValid)
             {
                 int res = _service.UpdateById(id, account);
-                if (res > 0) return Ok();
-                else return BadRequest();
+                if (res > 0)
+                {
+                    return Ok(new ResponseEntity($"Update account by id = {id} successfully"));
+                }
+                else
+                {
+                    return BadRequest(new ResponseEntity($"Update account by id = {id} failed"));
+                }
             }
             return BadRequest();
         }
 
         [Route("account/delete/{id}")]
         [HttpDelete]
-        public ActionResult DeleteAccount(long id)
+        [Authorize]
+        public ActionResult DeleteAccountById(long id)
         {
             int res = _service.Delete(id);
-            if (res > 0) return Ok();
-            else return BadRequest();
+            if (res > 0)
+            {
+                return Ok(new ResponseEntity($"Delete account by id = {id} successfully"));
+            }
+            else
+            {
+                return BadRequest(new ResponseEntity("Delete account failed"));
+            }
         }
 
 
@@ -87,22 +108,17 @@ namespace E_Commerce.Controllers
         {
             Account result = _service.Login(dto);
 
-            if (result == null)
+            if (result == null || !BCrypt.Net.BCrypt.Verify(dto.Password, result.Password))
             {
-                return new JsonResult("Username or Password is invalid.");
+                return BadRequest(new ResponseEntity("Your account is invalid"));
             }
-            if (!BCrypt.Net.BCrypt.Verify(dto.Password, result.Password))
-            {
-                return BadRequest(new { message = "Invalid Credentials" });
-            }
-
             var token = CreateToken(result);
 
             Response.Cookies.Append("Jwt-EcommercePUNH", token, new CookieOptions
             {
                 HttpOnly = true
             });
-            return new JsonResult(new { Token = token });
+            return Ok(new ResponseEntity("Login successfully", new { Token = token }));
         }
 
         [Route("admin/register")]
@@ -110,8 +126,11 @@ namespace E_Commerce.Controllers
         public ActionResult Register(AdminSignupDto dto)
         {
             string res = _service.Register(dto);
-            if (res == "1") return Ok();
-            else return new JsonResult(res);
+            if (res == "1")
+            {
+                return Ok(new ResponseEntity("Register successfully"));
+            }
+            else return BadRequest(new ResponseEntity("Register failed", res));
         }
 
         [Route("admin/logout")]
@@ -119,7 +138,7 @@ namespace E_Commerce.Controllers
         public ActionResult Logout()
         {
             Response.Cookies.Delete("Jwt-EcommercePUNH");
-            return Ok(new { message = "Đã đăng xuất" });
+            return Ok(new ResponseEntity("Logout successfully"));
         }
 
         private string CreateToken(Account account)

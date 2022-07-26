@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace E_Commerce.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220724123451_DataMigration")]
+    [Migration("20220726101438_DataMigration")]
     partial class DataMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,6 +47,7 @@ namespace E_Commerce.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<long?>("UserId")
+                        .IsRequired()
                         .HasColumnType("bigint");
 
                     b.Property<string>("Username")
@@ -74,13 +75,46 @@ namespace E_Commerce.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2022, 7, 24, 19, 34, 49, 955, DateTimeKind.Local).AddTicks(733),
-                            Email = "nhat@gmail.com",
-                            LastModifiedAt = new DateTime(2022, 7, 24, 19, 34, 49, 955, DateTimeKind.Local).AddTicks(1580),
-                            Password = "$2a$11$xdvLuNvciXF.ShZFYc9twe7IyOBoOLURsjjDBD8uSSAIQWZsaJ/WC",
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 36, 850, DateTimeKind.Local).AddTicks(3742),
+                            Email = "email1@gmail.com",
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 36, 850, DateTimeKind.Local).AddTicks(4238),
+                            Password = "$2a$11$DAcPcRn4NSQz2CjtDpmfFuPeeLKVJnAxnhYxj7kfZ922eyR4UDRj2",
                             RoleId = 1L,
                             UserId = 1L,
-                            Username = "admin"
+                            Username = "account1"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 71, DateTimeKind.Local).AddTicks(8430),
+                            Email = "email2@gmail.com",
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 71, DateTimeKind.Local).AddTicks(8431),
+                            Password = "$2a$11$93Vo78iq53DbSZ2PqxMNb.vLEseScXrJhxC727wNco0aPTwEqZyMa",
+                            RoleId = 2L,
+                            UserId = 2L,
+                            Username = "account2"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 290, DateTimeKind.Local).AddTicks(3953),
+                            Email = "email3@gmail.com",
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 290, DateTimeKind.Local).AddTicks(3955),
+                            Password = "$2a$11$HXPFJVtmEbgIlwcQDEAuguouqLC8lsz6BeSolfWBqrDUBDtFsCjdi",
+                            RoleId = 3L,
+                            UserId = 3L,
+                            Username = "account3"
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 535, DateTimeKind.Local).AddTicks(513),
+                            Email = "email4@gmail.com",
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 535, DateTimeKind.Local).AddTicks(514),
+                            Password = "$2a$11$wMk1UqgqEwT0PyqCuQQ05uu93Te.LmHhWrO1q29hCzUX4LcBQk6L6",
+                            RoleId = 4L,
+                            UserId = 4L,
+                            Username = "account4"
                         });
                 });
 
@@ -400,6 +434,36 @@ namespace E_Commerce.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OptionRole");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(8021),
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(8024),
+                            Name = "Get"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(8028),
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(8028),
+                            Name = "Post"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(8030),
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(8031),
+                            Name = "Put"
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(8033),
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(8034),
+                            Name = "Delete"
+                        });
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Order", b =>
@@ -521,15 +585,57 @@ namespace E_Commerce.Migrations
                         {
                             Id = 1L,
                             Address = "address",
-                            CreatedAt = new DateTime(2022, 7, 24, 19, 34, 50, 202, DateTimeKind.Local).AddTicks(3207),
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(4850),
                             Detail = "detail",
                             Email = "email@gmail.com",
                             IsCompany = true,
-                            LastModifiedAt = new DateTime(2022, 7, 24, 19, 34, 50, 202, DateTimeKind.Local).AddTicks(3208),
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(4851),
                             Name = "name",
-                            Phone = "0900000000",
+                            Phone = "0000000001",
                             Photo = "photo",
                             UserId = 1L
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Address = "address",
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(7150),
+                            Detail = "detail",
+                            Email = "email2@gmail.com",
+                            IsCompany = false,
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(7151),
+                            Name = "name",
+                            Phone = "0000000002",
+                            Photo = "photo",
+                            UserId = 2L
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            Address = "address",
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(7155),
+                            Detail = "detail",
+                            Email = "email3@gmail.com",
+                            IsCompany = false,
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(7156),
+                            Name = "name",
+                            Phone = "0000000003",
+                            Photo = "photo",
+                            UserId = 3L
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            Address = "address",
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(7159),
+                            Detail = "detail",
+                            Email = "email4@gmail.com",
+                            IsCompany = true,
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(7159),
+                            Name = "name",
+                            Phone = "0000000004",
+                            Photo = "photo",
+                            UserId = 4L
                         });
                 });
 
@@ -552,6 +658,50 @@ namespace E_Commerce.Migrations
                     b.HasIndex("OptionId");
 
                     b.ToTable("Permission");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = 1L,
+                            OptionId = 1L,
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(8595),
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(8950)
+                        },
+                        new
+                        {
+                            RoleId = 1L,
+                            OptionId = 2L,
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 751, DateTimeKind.Local).AddTicks(116),
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 751, DateTimeKind.Local).AddTicks(119)
+                        },
+                        new
+                        {
+                            RoleId = 1L,
+                            OptionId = 3L,
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 751, DateTimeKind.Local).AddTicks(120),
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 751, DateTimeKind.Local).AddTicks(121)
+                        },
+                        new
+                        {
+                            RoleId = 1L,
+                            OptionId = 4L,
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 751, DateTimeKind.Local).AddTicks(122),
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 751, DateTimeKind.Local).AddTicks(123)
+                        },
+                        new
+                        {
+                            RoleId = 2L,
+                            OptionId = 1L,
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 751, DateTimeKind.Local).AddTicks(124),
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 751, DateTimeKind.Local).AddTicks(125)
+                        },
+                        new
+                        {
+                            RoleId = 2L,
+                            OptionId = 2L,
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 751, DateTimeKind.Local).AddTicks(126),
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 751, DateTimeKind.Local).AddTicks(126)
+                        });
                 });
 
             modelBuilder.Entity("E_Commerce.Models.Photo", b =>
@@ -655,6 +805,7 @@ namespace E_Commerce.Migrations
                         .HasColumnType("text");
 
                     b.Property<long?>("OrganizerId")
+                        .IsRequired()
                         .HasColumnType("bigint");
 
                     b.Property<string>("Photo")
@@ -736,9 +887,6 @@ namespace E_Commerce.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<long?>("DiscountId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long>("Id")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("LastModifiedAt")
@@ -952,9 +1100,30 @@ namespace E_Commerce.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTime(2022, 7, 24, 19, 34, 50, 201, DateTimeKind.Local).AddTicks(9021),
-                            LastModifiedAt = new DateTime(2022, 7, 24, 19, 34, 50, 201, DateTimeKind.Local).AddTicks(9022),
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(287),
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(288),
                             Name = "admin"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(740),
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(741),
+                            Name = "shop-owner"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(743),
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(744),
+                            Name = "manager"
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(746),
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(747),
+                            Name = "staff"
                         });
                 });
 
@@ -1064,12 +1233,48 @@ namespace E_Commerce.Migrations
                             Id = 1L,
                             AccountId = 1L,
                             Avatar = "photo.png",
-                            CreatedAt = new DateTime(2022, 7, 24, 19, 34, 50, 202, DateTimeKind.Local).AddTicks(225),
-                            FullName = "Võ Hoàng Nhật",
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(1483),
+                            FullName = "User 1",
                             Gender = 1,
-                            LastModifiedAt = new DateTime(2022, 7, 24, 19, 34, 50, 202, DateTimeKind.Local).AddTicks(225),
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(1484),
                             OrganizerId = 1L,
-                            Phone = "0942400722"
+                            Phone = "0000000001"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            AccountId = 2L,
+                            Avatar = "photo.png",
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(4089),
+                            FullName = "User 2",
+                            Gender = 0,
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(4090),
+                            OrganizerId = 2L,
+                            Phone = "0000000002"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            AccountId = 3L,
+                            Avatar = "photo.png",
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(4094),
+                            FullName = "User 3",
+                            Gender = 0,
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(4094),
+                            OrganizerId = 3L,
+                            Phone = "0000000003"
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            AccountId = 4L,
+                            Avatar = "photo.png",
+                            CreatedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(4097),
+                            FullName = "User 4",
+                            Gender = 1,
+                            LastModifiedAt = new DateTime(2022, 7, 26, 17, 14, 37, 750, DateTimeKind.Local).AddTicks(4098),
+                            OrganizerId = 4L,
+                            Phone = "0000000004"
                         });
                 });
 
@@ -1213,7 +1418,8 @@ namespace E_Commerce.Migrations
                     b.HasOne("E_Commerce.Models.User", "User")
                         .WithOne("Account")
                         .HasForeignKey("E_Commerce.Models.Account", "UserId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .IsRequired();
 
                     b.Navigation("Role");
 
@@ -1378,8 +1584,10 @@ namespace E_Commerce.Migrations
             modelBuilder.Entity("E_Commerce.Models.ProductBrand", b =>
                 {
                     b.HasOne("E_Commerce.Models.Organizer", "Organizer")
-                        .WithMany()
-                        .HasForeignKey("OrganizerId");
+                        .WithMany("Brands")
+                        .HasForeignKey("OrganizerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Organizer");
                 });
@@ -1597,6 +1805,8 @@ namespace E_Commerce.Migrations
 
             modelBuilder.Entity("E_Commerce.Models.Organizer", b =>
                 {
+                    b.Navigation("Brands");
+
                     b.Navigation("Discounts");
 
                     b.Navigation("ProductCategories");

@@ -32,7 +32,7 @@ namespace E_Commerce.DataAccess
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Banner> Banners { get; set; }
         public DbSet<Cart> Carts { get; set; }
-        public DbSet<CartProduct> CartDetails { get; set; }
+        public DbSet<CartProduct> CartProducts { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Discount> Discounts { get; set; }
         public DbSet<DiscountType> DiscountTypes { get; set; }
@@ -636,6 +636,14 @@ namespace E_Commerce.DataAccess
 
                 entity.Property(e => e.Photo)
                     .IsRequired(true);
+
+                entity.Property(e => e.OrganizerId)
+                    .IsRequired(true);
+
+                entity.HasOne<Organizer>(o => o.Organizer)
+                    .WithMany(m => m.Brands)
+                    .HasForeignKey(fk => fk.OrganizerId)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
             #endregion
             #region ProductCategory

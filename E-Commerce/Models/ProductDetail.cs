@@ -2,7 +2,7 @@
 
 namespace E_Commerce.Models
 {
-    public class ProductDetail : AbstractModel
+    public class ProductDetail
     {
         private long? productId;
         private long? productVarianceId;
@@ -13,6 +13,8 @@ namespace E_Commerce.Models
         private double price;
         private string status;
         private string photo;
+        private DateTime createdAt;
+        private DateTime lastModifiedAt;
 
         private Product product;
         private ProductVariance productVariance;
@@ -34,5 +36,7 @@ namespace E_Commerce.Models
         public Size ProductSize { get => productSize; set => productSize = value; }
         public Discount Discount { get => discount; set => discount = value; }
         public ICollection<CartProduct> CartDetails { get => cartDetails; set => cartDetails = value; }
+        public DateTime CreatedAt { get => createdAt; set => createdAt = value; }
+        public DateTime LastModifiedAt { get => lastModifiedAt; set => lastModifiedAt = value; }
     }
 }

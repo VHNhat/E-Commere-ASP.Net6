@@ -19,6 +19,7 @@ namespace E_Commerce.Models
         private ICollection<Product> products;
         private ICollection<ProductVariance> productVariances;
         private ICollection<ReviewProduct> reviews;
+        private ICollection<ProductBrand> brands;
 
         public string Name { get => name; set => name = value; }
         public string Phone { get => phone; set => phone = value; }
@@ -35,5 +36,6 @@ namespace E_Commerce.Models
         public ICollection<Product> Products { get => products; set => products = value; }
         public ICollection<ProductVariance> ProductVariances { get => productVariances; set => productVariances = value; }
         public ICollection<ReviewProduct> Reviews { get => reviews; set => reviews = value; }
+        public ICollection<ProductBrand> Brands { get => brands; set => brands = value; }
     }
 }

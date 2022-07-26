@@ -107,7 +107,10 @@ namespace E_Commerce.Services
 
                 ctx.Accounts.Add(newAcc);
                 var res = ctx.SaveChanges();
-                if (res > 0) return "1";
+                if (res > 0)
+                {
+                    return "1";
+                }
                 return "";
             }
             catch
